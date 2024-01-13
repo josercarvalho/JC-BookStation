@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Sistema Gestor de Clientes - Versão 1.0";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+    @if (Request.IsAuthenticated)
+    {
+        <br/>
+        <ul class="breadcrumb">
+            <li class="dropdown-header">ACESSO RÁPIDO</li>
+            @*<li><a href="@Url.Action("Construcao", "Home")">Orçamento</a></li>*@
+            <li><a href="@Url.Action("Index", "Venda")">Abrir Venda</a></li>
+            <li><a href="@Url.Action("Create", "Compra")">Abrir Compra</a></li>
+            <li><a href="@Url.Action("Create", "Cliente")">Cliente Cadastrar</a></li>
+            <li><a href="@Url.Action("Create", "Fornecedor")">Fornecedor Cadastrar</a></li>
+            <li><a href="@Url.Action("Create", "Produto")">Produtos Cadastrar</a></li>
+            <li><a href="@Url.Action("index", "Bonus")">Bonus</a></li>
+        </ul>
+        @Html.Partial("_Detalhes")
+    }
+    else
+    {
+        <h1>Bem Vindo ao Sistema Gestor de Clientes - Versão 1.0</h1>
+        @Html.Partial("_Detalhes")
+    }

@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Nossa Empresa";
+}
+
+<div class="jumbotron">
+    <h1>Book Station Distribuidora</h1>
+</div>
+
+<div class="pagination-sm text-center">
+    <img src="~/Images/destaque1.jpg" />
+</div>
+
+<div class="body-content-sub">
+    <div class="text-justify">
+        <h2>Quem somos?</h2>
+        <p>
+            Empresa líder no setor de distribuição, a mais de 30 anos no mercado, atuante no segmento de atacado, com matérias pedagógicas para crianças e adultos. (infantil,
+            pedagógicos, jurídicos, exatas, culinária, dicionários e etc).
+        </p>
+        <h2>O que fornecemos para os revendeores?</h2>
+        <p>
+            Fornecemos toda a orientação necessária para a transição do seu negócio.
+            <br />
+            Linha completa em matéria didáticos(sempre muito atualizados), treinamentos,  escritório virtual com todo controle de seus negócios e compras. compromisso com os resultados e com a inovação permanente.
+        </p>
+        <h2>Objetivos da Book Station.</h2>
+        <p>
+            Ultrapassar as barreiras da desigualdade social levando a oportunidade de educação e lazer para as crianças e adultos que são o futuro de toda a humanidade. Isso resume-se em uma só palavra ... DEDICAÇÃO!
+        </p>
+        <h2>Objetivos financeiros?</h2>
+        <p>
+            Gerar empregos, formando profissionais, com nossa forma de vendas lucrativa de resultados imediatos
+        </p>
+        <div class="text-center">
+            @Html.ActionLink("QUERO SABER MAIS!", "ComoFunciona", "Home", null, new { @class = "btn btn-info btn-lg" })
+            @Html.ActionLink("QUERO PARTICIPAR!", "Create", "Cadastro", null, new { @class = "btn btn-warning btn-lg" })
+        </div>
+    </div>
+</div>

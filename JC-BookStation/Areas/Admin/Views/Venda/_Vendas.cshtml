@@ -1,0 +1,76 @@
+﻿@model List<JC_BookStation.Data.Models.Venda>
+
+<div class="row">
+    <div class="col-md-7 col-xs-8">
+        <h4><b>Vendas do Colaborador </b> - @ViewBag.Cliente</h4>
+    </div>
+    <div class="col-md-5 col-sm-3 text-right">
+        @Html.ActionLink("OK", "Index", "Venda", null, new { @class = "btn btn-success", @title = "OK" })
+    </div>
+
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Dt.Venda</th>
+                <th>Tipo Venda</th>
+                <th>Forma Pag.</th>
+                <th>Parcela(s)</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!@Model.Any())
+            {
+                <tr><td colspan="6" class="text-center"><em>Sem Venda para este Colaborador!</em></td></tr>
+            }
+            else
+            {
+
+                foreach (var item in @Model)
+                {
+                    <tr>
+                        <td>
+                            @item.IdVenda.ToString("0000")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataVenda)
+                        </td>
+                        <td>
+                            @(item.TipoVenda.Equals(0) ? Html.Label("DIRETA") : Html.Label("COMISSIONADA"))
+                        </td>
+                        <td>
+                            @if (@item.IdFinanceiroTipo.Equals(1))
+                            {
+                                @Html.Label("À VISTA")
+                            }
+                            @if (@item.IdFinanceiroTipo.Equals(2))
+                            {
+                                @Html.Label("CARTÃO")}
+                            @if (@item.IdFinanceiroTipo.Equals(3))
+                            {
+                                @Html.Label("CHEQUE")}
+                            @if (@item.IdFinanceiroTipo.Equals(4))
+                            {
+                                @Html.Label("BOLETO")}
+                            @if (@item.IdFinanceiroTipo.Equals(5))
+                            {
+                                @Html.Label("PROMISSÓRIA")}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Parcelas)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelintem => item.Valor)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6"><b>Total de Vendas: </b><span>@ViewBag.VendasTotal</span></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

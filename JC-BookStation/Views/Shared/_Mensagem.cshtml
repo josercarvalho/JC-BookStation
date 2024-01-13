@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.ErrTitulo</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    @*<div class="container">*@
+    @using (Html.BeginForm("Index", "Home", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin text-center" }))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h2 class="form-signin-heading">@ViewBag.ErrTitulo</h2>
+            </div>
+            <div class="panel-body">
+                @*<img src="~/Images/JCarvalho_azul_2.png" class="img-rounded" />*@
+                <img src="~/images/Logo_Carvalho.png" width="220" height="120" />
+                <h1>@ViewBag.ErrTituloMensagem</h1>
+                <h4>@ViewBag.ErrMensagem&hellip;</h4>
+                @Html.ActionLink("OK", "Index", "Home", null, new { @class = "btn btn-success btn-block" })
+                @*@if (Request.IsAuthenticated)
+                    {
+                        @Html.ActionLink("OK", "Index", "Home", null, new { @class= "btn btn-success btn-block" })
+                    } else {
+                        @Html.ActionLink("OK", "Index", "Usuario", null, new { @class= "btn btn-success btn-block" })
+                    }*@
+            </div>
+        </div>
+    }
+    @*</div>*@
+</body>
+</html>

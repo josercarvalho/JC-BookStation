@@ -1,0 +1,128 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Produtos>
+
+@{
+    ViewBag.Title = "Cadastrar Produtos";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Produtos</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+
+    @using (Html.BeginForm("Index", "Produto", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="col-md-7 col-xs-8">
+            <div class="col-md-6">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Procura por Nome" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" title="Procurar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @Html.ActionLink("Novo Registro", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })
+            @Html.ActionLink("Imprimir Estoque", "PdfEstoque", null, new { @class = "btn btn-primary", @Title = "Imprimir Estoque", @target = "_blank;" })
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <br />
+    <table class="table table-hover table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>Código-barras</th>
+                <th>Nome</th>
+                <th>Valor Venda</th>
+                <th>Bonus</th>
+                <th>Estoque</th>
+                <th>Estoque Mínimo</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoBarras)
+                        @*@item.IdProduto.ToString("0000")*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comissao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estoque)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstoqueMinimo)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            @Html.ActionLink(" ", "Edit", new { id = item.IdProduto }, new { @class = "btn btn-default glyphicon glyphicon-folder-open", @Title = "Editar" })
+                            <button id="btn-delete" class="btn btn-default btn-delete glyphicon glyphicon-trash" data-nome="@item.Nome" data-id="@item.IdProduto" title="Excluir @item.Nome"></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload(true);
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                var nome = $(this).data("nome");
+                bootbox.confirm("Tem certeza que deseja EXCLUIR " + nome + " ?", function (result) {
+                    if (result) {
+                        excluiProduto(itemId);
+                        setTimeout("Refresh()", 3000);
+                    }
+                });
+            });
+
+            var excluiProduto = function (id) {
+                var strUrl = "/Produto/DeleteProduto";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+}

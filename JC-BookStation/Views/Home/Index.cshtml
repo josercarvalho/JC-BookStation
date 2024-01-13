@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Carousel Section -->
+<div id="main-Carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#main-Carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#main-Carousel" data-slide-to="1" class=""></li>
+        <li data-target="#main-Carousel" data-slide-to="2" class=""></li>
+        <li data-target="#main-Carousel" data-slide-to="3" class=""></li>
+        @*<li data-target="#main-Carousel" data-slide-to="4" class=""></li>
+        <li data-target="#main-Carousel" data-slide-to="5" class=""></li>*@
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        @*<div class="item active">
+            <div class="carousel-caption">
+                <div class="col-md-6 col-sm-6">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Seja bem vindo a um mundo de conhecimento, diversão e lazer.</h3>
+                            <div class="fb-like" data-href="https://www.facebook.com/ayrton.correa.129" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-6 col-sm-6">
+                    <img src="~/Images/bemvindo.png" />
+                    <h3>Venha conhecer os produtos que com diversão ira levar você a um mundo de conhecimento e interatividade. </h3>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill"></div>
+            <div class="carousel-caption">
+                <div class="thumbnail">
+                    <img src="~/Images/seja_bem_vindo.png" />
+                </div>
+                <div class="caption">
+                    @Html.ActionLink("Cadastre-se conosco...", "Create", "Cadastro", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>*@
+        <div class="item active">
+            <div class="fill "></div>
+            <div class="carousel-caption">
+                <img src="~/Images/sejabemvindo.png" />
+                <h2>
+                    A mais de 30 anos no mercado,
+                    <br />
+                    fazendo historia e levando educação a cada um que precisa de leitura.
+                    <br />
+                    @Html.ActionLink("Cadastre-se conosco...", "Create", "Cadastro", null, new { @class = "btn btn-sm btn-danger" })
+                </h2>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill"></div>
+            <img src="~/Images/Capa.png" alt=""/>
+            @*<div class="carousel-caption">
+                <div class="caption">
+                    @Html.ActionLink("Cadastre-se conosco...", "Create", "Cadastro", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>*@
+        </div>
+        <div class="item">
+            <div class="fill"></div>
+            <img src="~/Images/Capa 2.png" alt="" />
+            @*<div class="carousel-caption">
+                <div class="caption">
+                    @Html.ActionLink("Cadastre-se conosco...", "Create", "Cadastro", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>*@
+        </div>
+        <div class="item">
+            <div class="fill"></div>
+            <img src="~/Images/Capa 3.png" alt="" />
+            <div class="carousel-caption">
+                <div class="caption">
+                    @Html.ActionLink("Cadastre-se conosco...", "Create", "Cadastro", null, new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#main-Carousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#main-Carousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+<!--End Carousel Section -->
+
+<div class="body-content-sub">
+
+    <div class="col-sm-8 blog-main">
+        <div class="blog-header">
+            <h2 class="blog-title">Book Station Distribuidora</h2>
+            <p class="lead blog-description">
+                A mais de <strong>30 anos</strong> no mercado, fazendo historia e levando educação a cada um que precisa de leitura.
+            </p>
+            @*@Html.ActionLink("QUERO SABER MAIS!", "ComoFunciona", "Home", null, new { @class = "btn btn-warning btn-lg" })
+                @Html.ActionLink("QUERO PARTICIPAR!", "Create", "Cadastro", null, new { @class = "btn btn-primary btn-lg" })*@
+        </div>
+
+        <p class="lead text-justify">
+            A <em><b>Book Station</b></em>, ultrapassando as barreiras da desigualdade social e levando a oportunidade de educação e lazer para as crianças e adultos que são o futuro de toda a humanidade. Isso resume-se em uma só palavra ... DEDICAÇÃO!
+        </p>
+        <p>Entregamos para todo o Brasil.</p>
+
+        <div class="fb-like-box" data-href="https://www.facebook.com/ayrton.correa.129" data-width="370" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+
+    </div>
+
+    <div class="col-sm-3 col-sm-offset-1">
+        <div class="sidebar-module sidebar-module-inset">
+            <h4 class="lead-top">Book Station</h4>
+            <p>
+                SEJA VOCE TAMBEM E UM REVENDEDOR,  venha conhecer nossa forma lucrativa de ganhos diários E O MELHOR DI TUDO SEM INVESTIR NADA!!!
+            </p>
+            @Html.ActionLink("QUERO PARTICIPAR!", "Create", "Cadastro", null, new { @class = "btn btn-warning btn-sm" })
+        </div>
+
+        <div class="sidebar-module sidebar-module-inset">
+            <img src="~/Images/esk-seja-parceiro.jpg" width="190" height="190" />
+        </div>
+
+        <div class="sidebar-module sidebar-module-inset">
+            <h4 class="lead-top">Hora Certa</h4>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                    codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="190" height="190">
+                <param name="movie" value="@Url.Content("~/Images/Relogio.swf")">
+                <param name="quality" value="high">
+                <embed src="@Url.Content("~/Images/Relogio.swf")" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                       type="application/x-shockwave-flash" width="170" height="180">
+            </object>
+        </div>
+
+        <div class="sidebar-module sidebar-module-inset">
+            <img src="~/Images/faceimg.jpg" alt="Facebook" />
+            <div class="fb-like-box" data-href="https://www.facebook.com/ayrton.correa.129" data-width="200" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/MyJS/docs.js"></script>
+    <script>
+
+        !function ($) {
+            $(function () {
+                // carousel demo
+                $('#main-Carousel').carousel();
+            });
+        }(window.jQuery)
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+}

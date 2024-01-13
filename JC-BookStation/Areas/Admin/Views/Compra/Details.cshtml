@@ -1,0 +1,105 @@
+﻿@model JC_BookStation.Data.Models.Compra
+
+@{
+    ViewBag.Title = "Cadastrar Compra";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detaslhes da Compra</h2>
+
+@using (Html.BeginForm("Details", "Compra", FormMethod.Get))
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row disabled">
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.CodigoNota, new { @class = "form-control", @title = "Codigo da Nota Fiscal", @placeholder = "Nota Fiscal", @data_bind = "value: CodigoNota", @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(model => model.CodigoNota)
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownList("IdFornecedor", ViewBag.IdFornecedor as SelectList, "Fornecedor...", new { @class = "form-control", @data_bind = "value: IdFornecedor" })
+                    @Html.ValidationMessageFor(model => model.IdFornecedor)
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.DataCompra, new { @class = "form-control", @title = "Data da Compra", @placeholder = "Data da Compra", @data_bind = "value: DataCompra" })
+                    @Html.ValidationMessageFor(model => model.ValorTotal)
+                </div>
+                <div class="col-md-2">
+                    @Html.DropDownList("IdFinanceiroTipo", ViewBag.IdFinanceiroTipo as SelectList, "Tipo Financeiro...", new { @class = "form-control", @data_bind = "value: IdFinanceiroTipo" })
+                    @Html.ValidationMessageFor(model => model.DataCompra)
+                </div>
+                <div class="col-md-1">
+                    @Html.TextBoxFor(model => model.Parcelas, new { @class = "form-control", @title = "Nº de Parcelas", @placeholder = "Parc.", @data_bind = "value: Parcelas" })
+                    @Html.ValidationMessageFor(model => model.Parcelas)
+                </div>
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.ValorTotal, new { @class = "form-control dinheiro", @title = "Valor Total em Nota", @placeholder = "Valor Total", @data_bind = "value: ValorTotal" })
+                    @Html.ValidationMessageFor(model => model.ValorTotal)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Obs, new { @class = "form-control", @title = "Observação", @placeholder = "Observação", @data_bind = "value: Obs" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<br />
+<div class="row">
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoNota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Obs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Parcelas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fornecedores.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoNota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Obs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parcelas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fornecedores.Nome)
+        </td>
+        <td>
+            <div class="btn-group">
+				@Html.ActionLink(" ", "Edit", new { id=item.IdCompra }, new { @class="btn btn-default glyphicon glyphicon-folder-open", @Title="Editar" }) 
+				@Html.ActionLink(" ", "Details", new { id=item.IdCompra }, new { @class="btn btn-default glyphicon glyphicon-user", @Title="Detalhes" }) 
+				@Html.ActionLink(" ", "Delete", new { id=item.IdCompra }, new { @class="btn btn-default glyphicon glyphicon-trash", @Title="Excluir" })
+			</div>
+        </td>
+    </tr>
+}
+</table>
+</div>
+

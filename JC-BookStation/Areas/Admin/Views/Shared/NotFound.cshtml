@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Página não encontrada";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Página não encontrada</h1>
+<hr />
+<p>Não foi possível encontrar a página: @ViewBag.RequestedUrl</p>
+@if (ViewBag.ReferrerUrl != null)
+{
+    <p>Voltar para a <a href="@ViewBag.ReferrerUrl">página anterior</a>.</p>
+}
+
+@* Error page must be longer than 512 bytes for IE and Chrome to show it. 
+   So add padding in case we're short. *@
+@(new string(' ', 512))

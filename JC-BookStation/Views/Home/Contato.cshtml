@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Contato";
+}
+
+<div class="jumbotron">
+    <h1>Entre em contato conosco</h1>
+</div>
+
+<div class="body-content-sub">
+
+    @using (Html.BeginForm("Contato", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            @Html.Label("Nome", null, new { @class = "col-lg-3 control-label input-lg" })
+            <div class="col-lg-6">
+                @Html.TextBox("Nome", "Nome", new { @class = "form-control input-lg", @autofocus = "autofocus", @onfocus = "this.value=''", @placeholder = "Nome" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("E-mail", null, new { @class = "col-lg-3 control-label input-lg" })
+            <div class="col-lg-6">
+                @Html.TextBox("Email", "E-mail", new { @class = "form-control input-lg", @onfocus = "this.value=''", @placeholder = "E-mail" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Mensagem", null, new { @class = "col-lg-3 control-label  input-lg" })
+            <div class="col-lg-6">
+                @Html.TextArea("Mensagem", new { @class = "form-control input-lg", @onfocus = "this.value=''", @placeholder = "Mensagem" })
+            </div>
+        </div>
+
+        <div class="col-md-offset-3 col-md-5">
+            <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+        </div>
+    }
+</div>

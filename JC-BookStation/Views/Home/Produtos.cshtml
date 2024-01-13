@@ -1,0 +1,51 @@
+﻿@model IEnumerable<JC_BookStation.Data.Models.Produtos>
+@{
+    ViewBag.Title = "Produtos";
+}
+
+<div class="jumbotron">
+    <h1>Produtos ...</h1>
+    <h2>Vendas no <em>VARREJO</em> e <em>ATACADO</em></h2>
+</div>
+
+
+@Html.Partial("_Protudos", Model)
+
+@*<div class="body-content-sub">
+
+        <ul style="list-style-type: none;">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <hr class="featurette-divider">
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="~/UploadImages/@item.NomeFoto" class="img-responsive" data-src="holder.js/300x300/auto" alt="300x300" width="250" height="250" />
+                        </div>
+                        <div class="col-md-7">
+                            <h4 class="featurette-heading">@item.Nome</h4>
+                            <p class="text-justify">
+                                @item.Descricao
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <hr class="featurette-divider">
+        <div class="text-center">
+            @Html.ActionLink("QUERO SABER MAIS!", "ComoFunciona", "Home", null, new { @class = "btn btn-info btn-lg" })
+            @Html.ActionLink("QUERO PARTICIPAR!", "Create", "Cadastro", null, new { @class = "btn btn-warning btn-lg" })
+        </div>
+    </div>*@
+
+
+
+
+
+
+
+
+

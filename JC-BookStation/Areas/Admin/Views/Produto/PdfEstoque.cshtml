@@ -1,0 +1,51 @@
+﻿@model IEnumerable<JC_BookStation.Data.Models.Produtos>
+
+@{
+    ViewBag.Title = "Relatório do Estoque";
+    Layout = "~/Areas/Admin/Views/Shared/_PdfLayout.cshtml";
+}
+
+<h3>Relatório de Produtos no Estoque</h3>
+<hr/>
+<table class="table table-bordered table-striped">
+    <thead class="bg-info">
+        <tr>
+            <th>Código-Barras</th>
+            <th>Nome</th>
+            <th>Vl.Venda</th>
+            <th>Est.Min.</th>
+            <th>Estoque</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoBarras)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstoqueMinimo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estoque)
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+<br/>
+<hr/>
+<h4 class="form-group pull-right">
+    Total de Itens: <span>@Model.Count()</span>
+    &nbsp;&nbsp;&crarr;
+    Total de Produtos: <span>@Model.Sum(modelItem => modelItem.Estoque) </span>
+</h4>

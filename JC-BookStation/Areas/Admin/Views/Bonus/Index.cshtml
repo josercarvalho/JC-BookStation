@@ -1,0 +1,123 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Comissao>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Clientes para baixa dos Bonus</h2>
+@*<hr />*@
+
+<div class="form-horizontal dados">
+
+    @using (Html.BeginForm("Index", "Bonus", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="col-md-7 col-xs-8">
+            <div class="col-md-6">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Procura por Nome" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" title="Procurar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @*@Html.ActionLink("Novo Registro", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })*@
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <br />
+    <table class="table table-hover table-condensed table-responsive">
+        <tr>
+            <th>#</th>
+            <th>@Html.ActionLink("Nome do Colaborador", "Index", new { sortOrder = ViewBag.NomeParam })</th>
+            <th>Data Venda</th>
+            <th>Data Baixa</th>
+            <th>Valor Bonus</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.idComissao.ToString("0000")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clientes.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataBaixa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorComissao)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button id="btn-Bonus" class="btn btn-default btn-Bonus glyphicon glyphicon-ok" data-nome="@item.Clientes.Nome" data-id="@item.idComissao" title="Dar Baixa no Bonus de @item.Clientes.Nome"></button>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+    <div id="divResultado"></div>
+    <div id="divCarregando" class="progresso">
+        <img src="@Url.Content("~/Images/aguarde_g.gif")" alt="" />
+    </div>
+
+    <div class="bb-alert alert alert-info" style="display:none;">
+        <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+    </div>
+
+    @section scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+            $(function () {
+                Example.init({
+                    "selector": ".bb-alert"
+                });
+            });
+
+            function Refresh() {
+                location.reload(true);
+            };
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".btn-bonus").click(function (e) {
+                    e.preventDefault();
+                    var itemId = $(this).data('id');
+                    var nome = $(this).data("nome");
+                    bootbox.confirm("Confirma o pagamento do BONUS para " + nome + " ?", function (result) {
+                        if (result) {
+                            pagarBonus(itemId);
+                            setTimeout("Refresh()", 3000);
+                        }
+                    });
+                });
+
+                var pagarBonus = function (id) {
+                    var strUrl = "/Bonus/Baixa";
+                    $.post(strUrl, { id: id }, function (data) {
+                        Example.show(data);
+                    }, "json");
+                };
+            });
+        </script>
+    }

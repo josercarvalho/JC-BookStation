@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -> JC-Controler</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            @if (Request.IsAuthenticated)
+            {
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Book Station", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <ul class="nav navbar-nav">
+                            <li><a href="@Url.Action("Cliente", "Home")">Meus Dados</a></li>
+                            <li><a href="@Url.Action("Bonus", "Home")">Meus Bonus</a></li>
+                            <li><a href="@Url.Action("Rede", "Home")">Minha Rede</a></li>
+                            <li><a href="@Url.Action("Compras", "Home")">Minhas Compras</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <label class="navbar-brand">Olá @User.Identity.Name!</label>
+                                <form class="navbar-form navbar-left" role="search" action="@Url.Action("Sair", "ValidaUsuario")">
+                                    <button type="submit" class="glyphicon glyphicon-log-out btn btn-danger" title="Sair"></button>
+                                </form>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Desenvolvido por <a href="http://www.facebook.com/JCarvalhoInformatica" target="_blanck" title="JCarvalho TI">JCarvalho TI</a></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

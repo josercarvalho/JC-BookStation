@@ -1,0 +1,160 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Compra>
+
+@{
+    ViewBag.Title = "Cadastrar Compra";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Fornecedores para Compra</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+    @using (Html.BeginForm("Index", "Compra", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="col-md-7 col-xs-8">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Procura por Data" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" title="Procurar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @Html.ActionLink("Nova Compra", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <br />
+    <table class="table table-hover table-responsive table-condensed">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nota Fiscal</th>
+                <th>Fornecedor</th>
+                <th>Valor da Nota</th>
+                <th>Data Compra</th>
+                <th>Parcelamento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.IdCompra.ToString("000")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoNota)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fornecedores.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCompra)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Obs)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parcelas)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            @*@Html.ActionLink(" ", "Edit", new { id = item.IdCompra }, new { @class = "btn btn-default glyphicon glyphicon-folder-open", @Title = "Editar" })*@
+                            <button id="btn-delete" class="btn btn-default btn-delete glyphicon glyphicon-trash" data-nome="@item.CodigoNota" data-id="@item.IdCompra" title="Excluir nota nº @item.CodigoNota"></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div id="divResultado"></div>
+
+<div id="divCarregando" class="ui-loader" style="top: 270px; left: 553px; display: none;">
+    <div class="spin"></div>
+    <span>Aguarde ...</span>
+</div>
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+@section scripts {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload();
+        };
+    </script>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#SearchString").datepicker({
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                var nome = $(this).data("nome");
+                bootbox.confirm("Deseja mesmo EXCLUIR a nota Fiscal nº " + nome + " ?", function (result) {
+                    if (result) {
+                        excluirCompra(itemId);
+                        setTimeout("Refresh()", 3000);
+                    }
+                });
+            });
+
+            var excluirCompra = function (id) {
+                var strUrl = "/Compra/DeleteCompra";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+}

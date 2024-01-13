@@ -1,0 +1,98 @@
+﻿@model JC_BookStation.ViewModels.LucrosViewModel
+
+@{
+    ViewBag.Title = "Lucro das Vendas";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lucro das Vendas</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+
+    @using (Html.BeginForm("LucroVenda", "Venda", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="row col-md-7 col-xs-8">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("strDataInicial", ViewBag.CurrentFilter as string, new { @class = "form-control datepicker", @placeholder = "Data Inicial" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("strDataFinal", ViewBag.CurrentFilter as string, new { @class = "form-control datepicker", @placeholder = "Data Final" })
+                </div>
+
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-primary" type="submit" title="Procurar">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <hr />
+
+    <div class="form-inline">
+        <h4><b>Vendas no período </b><em> @Model.Periodo</em></h4>
+    </div>
+
+    <div class="form-inline">
+        @if (@Model.ValorTotal == 0)
+        {
+            <h3 class="bg-danger text-center"><b>*** Sem movimento no Período Solicitado ***</b></h3>
+        }
+        else
+        {
+            <h4><b>Total de Vendas:</b> @Model.TotalVendas</h4>
+            <h4><b>Total de Bônus do Período:</b> R$ @Model.ValorBonus</h4>
+            <h4><b>Valor Total das Vendas do Período:</b> R$ @Model.ValorTotal</h4>
+            <h4><b>Lucros das vendas do Período:</b> R$ @Model.ValorLucro</h4>
+        }
+    </div>
+</div>
+
+<div id="Carregando" class="ui-loader" style="top: 270px; left: 553px; display: none;">
+    <div class="spin"></div>
+    <span>Aguarde ...</span>
+</div>
+
+@section scripts {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(".datepicker").datepicker({
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            });
+        });
+    </script>
+}
+
+
+
+

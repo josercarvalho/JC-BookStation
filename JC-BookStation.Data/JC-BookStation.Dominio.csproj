@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{41D646D9-C457-485D-A858-0770C4FB70E0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JC_BookStation.Data</RootNamespace>
+    <AssemblyName>JC-BookStation.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MetaData\ClientesMetadata.cs" />
+    <Compile Include="MetaData\ComissaoMetadata.cs" />
+    <Compile Include="MetaData\CompraMetadata.cs" />
+    <Compile Include="MetaData\FinanceiroMetadata.cs" />
+    <Compile Include="MetaData\FornecedorMetadata.cs" />
+    <Compile Include="MetaData\FuncionarioMetadata.cs" />
+    <Compile Include="MetaData\LojaMetadata.cs" />
+    <Compile Include="MetaData\NotaPromissoriaMetadata.cs" />
+    <Compile Include="MetaData\ProdutoMetadata.cs" />
+    <Compile Include="MetaData\ProdutosCompraMetadata.cs" />
+    <Compile Include="MetaData\ProdutosOrcamentoMetadata.cs" />
+    <Compile Include="MetaData\ProdutosVendaMetadata.cs" />
+    <Compile Include="MetaData\VendaMetadata.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Arquivo.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cidade.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clientes.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comissao.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Compra.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConfigMenu.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estado.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estoque.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Estoque.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estoque.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estoque.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Estoque.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Financeiro.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceiroTipo.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fornecedores.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Funcao.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Funcionarios.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GrupoClientes.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GrupoProdutos.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Loja.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotaPromissoria.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orcamentos.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pais.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Produtos.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProdutosCompra.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProdutosOrcamento.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProdutosVenda.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Venda.cs">
+      <DependentUpon>Estoque.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Models\Estoque.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Estoque.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Estoque.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Estoque.edmx</DependentUpon>
+      <LastGenOutput>Estoque.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Models\Estoque.edmx.diagram">
+      <DependentUpon>Estoque.edmx</DependentUpon>
+    </None>
+    <None Include="Models\Estoque.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Estoque.edmx</DependentUpon>
+      <LastGenOutput>Estoque.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

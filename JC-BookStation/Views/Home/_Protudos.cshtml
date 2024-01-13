@@ -1,0 +1,52 @@
+﻿<div class="body-content-sub">
+
+    <div class="row text-center">
+        <ul style="list-style-type: none;">
+
+            @{ var count = 0; }
+
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="col-lg-4">
+                        <div class="thumbnail text-center" style="width: 260px; height: 300px">
+                            <a href="#aboutModal" data-toggle="modal" data-target="#@count">
+                                <img src="~/UploadImages/@item.NomeFoto" name="aboutme">
+                            </a>
+                            <p>
+                                <h5>@item.Nome</h5>
+                                <em>Click na imagem para maiores detalhes</em>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="@count" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h3 class="modal-title" id="myModalLabel">@item.Nome</h3>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="row text-center">
+                                        <img src="~/UploadImages/@item.NomeFoto" class="img-thumbnail" data-src="holder.js/300x300/auto" alt="300x300" width="250" height="250" />
+                                    </div>
+                                    <br />
+                                    @*<h3 class="featurette-heading">@item.Nome</h3>*@
+                                    <p class="text-justify">
+                                        @item.Descricao
+                                    </p>
+                                    <br>
+                                </div>
+                                <div class="modal-footer text-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                count++;
+            }
+        </ul>
+    </div>
+</div>

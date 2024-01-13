@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="492b3ee30f6747f6b537581bcd73b20a" Name="Diagram1" ZoomLevel="111">
+        <EntityTypeShape EntityType="Model.Arquivo" Width="1.5" PointX="10.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Cidade" Width="1.5" PointX="15.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Clientes" Width="1.5" PointX="5.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Comissao" Width="1.5" PointX="10.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Compra" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ConfigMenu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Estado" Width="1.5" PointX="13" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Financeiro" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FinanceiroTipo" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Fornecedores" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Funcao" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Funcionarios" Width="1.5" PointX="15" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GrupoClientes" Width="1.5" PointX="3.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GrupoProdutos" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loja" Width="1.5" PointX="15.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Orcamentos" Width="1.5" PointX="11" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Pais" Width="1.5" PointX="10.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Produtos" Width="1.5" PointX="8" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ProdutosCompra" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ProdutosOrcamento" Width="1.5" PointX="13.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ProdutosVenda" Width="1.5" PointX="10.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="18" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Venda" Width="1.5" PointX="8" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Arquivo_Produto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_cod_estado_cidade" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CLIENTES_GRUPOSCLIENTE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Comissao_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ORCAMENTOS_CLIENTES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Venda_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Comissao_Venda" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Compra_Fornecedor" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Financeiro_Compra" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUTOSCOMPRA_COMPRAS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk_cod_pais_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Financeiro_FinanceiroTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Financeiro_Venda" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Produto_Fornecedor" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Funcionario_Funcao" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Produto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Usuario_Loja" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUTOSORCAMENTO_ORCAMENTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUTOSCOMPRA_PRODUTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUTOSORCAMENTO_PRODUTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUTOSVENDA_PRODUTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PRODUTOSVENDA_VENDAS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.NotaPromissoria" Width="1.5" PointX="10.25" PointY="20.5" />
+        <AssociationConnector Association="Model.FK_NotaPromissoria_Cliente" />
+        <AssociationConnector Association="Model.FK_NotaPromissoria_Venda" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

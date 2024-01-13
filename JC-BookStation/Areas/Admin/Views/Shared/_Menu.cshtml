@@ -1,0 +1,106 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @*<label class="navbar-brand"><a href="@Url.Action("Index", "Home")">Book Station</a></label>*@
+            @Html.ActionLink("Book Station", "Index", "Home", null, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            @if (Request.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav">
+                    <!-- DropDown menu Cadastro -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li role="menuitem">@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+                            <li role="menuitem">@Html.ActionLink("Produtos", "Index", "Produto")</li>
+                            <li role="menuitem">@Html.ActionLink("Fornecedores", "Index", "Fornecedor")</li>
+                            <li role="menuitem">@Html.ActionLink("Funcionários", "Index", "Funcionario")</li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem">@Html.ActionLink("Empresa", "Index", "Lojas")</li>
+                        </ul>
+                    </li>
+                    <!-- DropDown menu Movimento -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Operações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li role="menuitem">@Html.ActionLink("Compra", "Index", "Compra")</li>
+                            <li role="menuitem" class="divider"></li>
+                            @*<li role="menuitem">@Html.ActionLink("Venda", "Index", "Venda")</li>*@
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Vendas</a>
+                                <ul class="dropdown-menu">
+                                    <li role="menuitem">@Html.ActionLink("Abrir Venda", "Index", "Venda")</li>
+                                    <li role="menuitem" class="divider"></li>
+                                    <li class="dropdown-header">CONSIGNADAS</li>
+                                    <li role="menuitem">@Html.ActionLink("Venda em aberto (BAIXA)", "VendaBaixa", "Venda")</li>
+                                </ul>
+                            </li>
+                            <li role="menuitem" class="divider"></li>
+                            <li role="menuitem">@Html.ActionLink("Bonus a Pagar", "Index", "Bonus")</li>
+                            @*<li class="dropdown-header">Dados Financeiros</li>*@
+                            @*<li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Dados Financeiros</a>
+                                <ul class="dropdown-menu">
+                                    
+                                    <li role="menuitem">@Html.ActionLink("Vendas Consignadas (baixa)", "Construcao", "Home")</li>
+                                    <li role="menuitem" class="divider"></li>
+                                    <li role="menuitem">@Html.ActionLink("Bonus a Pagar", "Index", "Bonus")</li>
+                                </ul>
+                            </li>*@
+                            @*<li role="menuitem" class="divider"></li>
+                            <li role="menuitem">@Html.ActionLink("Ajuste de Estoque", "Construcao", "Home")</li>*@
+                        </ul>
+                    </li>
+                    <!-- DropDown menu Consulta -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Listar <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li role="menuitem">@Html.ActionLink("Vendas Diretas", "VendaDireta", "Venda")</li>
+                            <li role="menuitem">@Html.ActionLink("Vendas Consignadas", "Consignadas", "Venda")</li>
+                            <li role="menuitem">@Html.ActionLink("Bonus Pagos", "BonusPago", "Bonus")</li>
+                            <li class="dropdown-header">Financeiro</li>
+                            @*<li role="menuitem">@Html.ActionLink("Movimentos", "MovimentoVenda", "Venda")</li>*@
+                            @*<li role="menuitem">@Html.ActionLink("Movimentos", "Construcao", "Home")</li>*@
+                            <li role="menuitem">@Html.ActionLink("Lucros do Período", "LucroVenda", "Venda")</li>
+                            @*<li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Movimento</a>
+                                <ul class="dropdown-menu">
+                                    <li role="menuitem">@Html.ActionLink("Venda em aberto", "VendaAberto", "Venda")</li>
+                                    <li role="menuitem" class="divider"></li>
+                                    <li role="menuitem">@Html.ActionLink("Vendas Diretas", "VendaDireta", "Venda")</li>
+                                    <li role="menuitem">@Html.ActionLink("Vendas Consignadas", "Consignadas", "Venda")</li>
+                                </ul>
+                            </li>*@
+                        </ul>
+                    </li>
+                    <!-- DropDown menu Tabelas -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tabelas <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li role="menuitem">@Html.ActionLink("Grupo de Clientes", "Index", "GrupoClientes")</li>
+                            <li role="menuitem">@Html.ActionLink("Categoria de Produtos", "Index", "Categoria")</li>
+                            @*<li role="menuitem">@Html.ActionLink("Comissões", "Construcao", "Home")</li>
+                            <li role="menuitem">@Html.ActionLink("Tipo Financeiro", "Construcao", "Home")</li>*@
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    @*<li><a href="@Url.Content("../home/about")" id="about">Sobre</a></li>*@
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            }
+            else
+            {
+                @Html.Partial("_LoginPartial")
+            }
+        </div>
+
+    </div>
+</div>

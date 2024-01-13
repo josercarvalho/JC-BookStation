@@ -1,0 +1,122 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Venda>
+
+@{
+    ViewBag.Title = "VendaDireta";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Vendas Diretas</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+    @using (Html.BeginForm("VendaDireta", "Venda", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="col-md-7 col-xs-8">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Procura por Data" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" title="Procurar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @*@Html.ActionLink("Nova Compra", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })*@
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <br />
+
+    <table class="table table-hover table-responsive table-condensed">
+        <thead>
+            <tr>
+                <th>Data Venda</th>
+                <th>Nome do Colaborador</th>
+                <th>Forma de Pag.</th>
+                <th>Parcelas</th>
+                <th>Valor</th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clientes.Nome)
+                    </td>
+                    <td>
+                        @if (@item.IdFinanceiroTipo.Equals(1))
+                        {
+                            @Html.Label("À VISTA")
+                        }
+                        @if (@item.IdFinanceiroTipo.Equals(2))
+                        {
+                            @Html.Label("CARTÃO")}
+                        @if (@item.IdFinanceiroTipo.Equals(3))
+                        {
+                            @Html.Label("CHEQUE")}
+                        @if (@item.IdFinanceiroTipo.Equals(4))
+                        {
+                            @Html.Label("BOLETO")}
+                        @if (@item.IdFinanceiroTipo.Equals(5))
+                        {
+                            @Html.Label("PROMISSÓRIA")}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parcelas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IdVenda }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.IdVenda }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IdVenda })
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("VendaDireta",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+@section scripts {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#SearchString").datepicker({
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            });
+        });
+    </script>
+}

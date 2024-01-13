@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "JCarvalho Tecnologia em Informática";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron lead">
+        <div class="content-wrapper" align="center">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+            </hgroup>
+            <p>
+                <h3>Bem vindo ao Book Station Controler</h3>
+                <h4>Controle de Clientes e Vendas</h4>
+            </p>
+        </div>
+</div>
+
+<div class="panel panel-default">
+    @*<div class="panel-heading"><b>@ViewBag.Message</b></div>*@
+    <div class="panel-body">
+        @*<div class="row">*@
+            <article class="col-lg-8">
+                <ol class="round">
+                    <li class="one">
+                        <h5>Cadastro de Clientes.</h5>
+                        Controle dos Atendimentos aos Clientes.
+                    </li>
+
+                    <li class="two">
+                        <h5>Cadastros de Compras, Orçamentos e Vendas.</h5>
+                        Controle de Estoque.
+                    </li>
+
+                    <li class="three">
+                        <h5>Cadastro de Ganhos por Indicação</h5>
+                        Controle de cliente que indicarem outros montará uma equipe e se torna um líder.
+                    </li>
+                </ol>
+            </article>
+
+            <aside class="col-lg-3">
+                <h3>Navegação Básica</h3>
+                <p>
+                    Navegação rápída.
+                </p>
+                <ul>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                </ul>
+            </aside>
+        @*</div>*@
+    </div>
+</div>

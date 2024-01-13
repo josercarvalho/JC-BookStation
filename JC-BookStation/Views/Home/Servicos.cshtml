@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Servicos";
+}
+
+
+<div class="jumbotron">
+    <h1>Serviços ...</h1>
+</div>
+
+<div class="pagination-sm text-center">
+    <img src="~/Images/destaque3.jpg" />
+</div>
+
+<div class="body-content-sub">
+    <div class="alert alert-info">
+        <p>
+            Na BOOKSTAION você encontra em único local todo acervo de produtos educativos . . (infantil, pedagógicos, jurídicos, exatas, culinária, dicionários e etc).
+        </p>
+        <p>
+            A mais completa distribuidora de livros do Brasil também sua forma de ganhos diários pelo bonus indicação (com as pessoas indicadas) em seu escritório virtual.
+        </p>
+        <p class="text-center">
+            <strong><<< EMTREGAS Á DOMICILIO >>></strong>
+        </p>
+    </div>
+    <h2>Interatividade</h2>
+    <p>
+        Através de nossos sistemas você poderá acompanhar o andamento de seus pedidos realizando consulta a nossos produtos...
+    </p>
+    <h2><span class="label label-danger"> Marketing Direcionado – PARCERIAS</span></h2>
+    <p>
+        Cadastre-se em nosso site para receber nossos informativos eletrônicos, participar de campanhas promocionais entre outras vantagens.
+    </p>
+    <p>
+        Abra sua conta na <strong>BOOK STATION</strong> e tenha acesso á grandes vantagens comerciais e serviços. Para cadastrar sua livraria, empresa, escola, faculdade ou biblioteca, ou empreendedor ligue já para nossa equipe de vendas, através do telefone: <span class="label label-success">(98) 3221.0035 / 8888.9656</span> ou pelo e-mail: bookstaion@hotmail.com
+    </p>
+    <h2>Grande Acervo</h2>
+    <p>
+        Mil títulos disponíveis para pronta entrega dos principais selos editorias nacionais e importados. Material didáticos nos segmentos (<strong>infantil, pedagógicos, jurídicos, exatas, culinária, dicionários e etc</strong>)
+    </p>
+    <div class="text-center">
+        @Html.ActionLink("QUERO SABER MAIS!", "ComoFunciona", "Home", null, new { @class = "btn btn-info btn-lg" })
+        @Html.ActionLink("QUERO PARTICIPAR!", "Create", "Cadastro", null, new { @class = "btn btn-warning btn-lg" })
+    </div>
+</div>

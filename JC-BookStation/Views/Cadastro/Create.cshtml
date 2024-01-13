@@ -1,0 +1,237 @@
+﻿@model JC_BookStation.Data.Models.Clientes
+
+@{
+    ViewBag.Title = "Cadastrar Clientes";
+}
+
+<div class="body-content-sub">
+
+    <h2>Cadastrar Clientes</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+            
+            @Html.HiddenFor(model => model.IdGrupo)
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.IdGrupo, "Grupo de Clientes", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.DropDownList("IdGrupo", null, "Selecione...", new { @class = "form-control", @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(model => model.IdGrupo)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeFantasia, "Nome de Fantasia", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.NomeFantasia, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NomeFantasia)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdIndica, "Indicação", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @*@Html.DropDownList("IdIndica", null, "Sem Indicação...", new { @class = "form-control" })*@
+                    @Html.TextBoxFor(model => model.IdIndica, new { @class = "form-control", @data_provide = "typeahead", @data_autocomplete = @Url.Action("SearchCliente", "Cadastro"), @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.IdIndica)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nascimento, "Data de Nascimento", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Nascimento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nascimento)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CPF, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.CPF, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CPF)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RG, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.RG, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RG)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InscEstadual, "Inscrição Estadual", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.InscEstadual, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.InscEstadual)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, "Login de Acesso", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Senha, "Senha de Acesso", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Senha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Senha)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Telefone, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Telefone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Telefone)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Celular, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Celular, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Celular)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Contato, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Contato, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Contato)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco, "Endereço", new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Endereco, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Endereco)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bairro, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.Bairro, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Bairro)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Estado, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.DropDownListFor(model => model.Estado, new SelectList(ViewBag.Estados as System.Collections.IEnumerable, "cod_estado", "nom_estado"), "Selecione o Estado...", new { @id = "ddlEstados", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Estado)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Cidade, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.DropDownListFor(model => model.Cidade, Enumerable.Empty<SelectListItem>(), "Selecione a Cidade...", new { @id = "ddlCidades", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Cidade)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CEP, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.CEP, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CEP)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Observacao, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Observacao)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-5">
+                    <button type="submit" class="btn btn-primary">Salvar Registros</button>
+                    <a class="btn btn-danger" href="@Url.Action("Index","Home")">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+
+    @*<script src="~/MyJS/CidadeEstado.js"></script>*@
+
+    <script type="text/javascript">
+
+        jQuery(function ($) {
+            $("#Nascimento").mask("99/99/9999");
+            $("#DataCadastro").mask("99/99/9999");
+            $("#Telefone").mask("(99) 9999-9999");
+            $("#Celular").mask("(99) 9999-9999");
+            $("#CPF").mask("999.999.999-99");
+            $("#CEP").mask("99.999-999");
+
+            $("#IdIndica").each(function () {
+                $(this).autocomplete({ source: $(this).attr("data-autocomplete"), minLength: 1 });
+            });
+        });
+
+        $(document).ready(function () {
+
+            $("#ddlEstados").change(function () {
+                var estadoId = $(this).val();
+                var url = '@Url.Action("LoadCidadeId", "Cadastro")';
+                //var url = '/Cliente/LoadCidadeId/';
+                $.getJSON(url, { estadoId: estadoId },
+                    function (estadosData) {
+                        $("#ddlCidades :gt(0)").remove();
+                        var select = $("#ddlCidades");
+                        select.attr('disabled', false);
+                        select.empty();
+                        select.append($('<option/>', {
+                            value: 0,
+                            text: "Selecione a Cidade... "
+                        }));
+                        $.each(estadosData, function (index, itemData) {
+                            //alert(estadosData);
+                            //alert(itemData);
+                            select.append($('<option/>', {
+                                value: itemData.Value,
+                                text: itemData.Text
+                            }));
+                        });
+                    });
+            });
+        })
+    </script>
+}

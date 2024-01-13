@@ -1,0 +1,195 @@
+﻿@model JC_BookStation.Data.Models.Produtos
+
+@{
+    ViewBag.Title = "Cadastrar Produtos";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h2>Cadastrar Produtos</h2>
+    <div class="form-horizontal dados">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdGrupo, "Categoria", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownList("IdGrupo", null, "Selecione...", new { @class = "form-control", @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(model => model.IdGrupo)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdFornecedor, "Fornecedor", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownList("IdFornecedor", null, "Selecione...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdFornecedor)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CodigoBarras,"Código de Barras", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.CodigoBarras, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CodigoBarras)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descricao, "Descrição", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Descricao)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorCompra, "Valor Compra", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.ValorCompra, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ValorCompra)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lucro, "Lucro em %", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Lucro, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Lucro)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorVenda, "Valor Venda", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.ValorVenda, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ValorVenda)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estoque, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Estoque, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Estoque)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EstoqueMinimo, "Estoue Mínimo", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.EstoqueMinimo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EstoqueMinimo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comissao, "Bonus", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @*@Html.TextBoxFor(model => model.Comissao, new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Comissao, new[]
+                {
+                    new SelectListItem {Text = "R$ 0,50", Value = "0,50"},
+                    new SelectListItem {Text = "R$ 1,00", Value = "1,00"},
+                    new SelectListItem {Text = "R$ 1,50", Value = "1,50"}
+                }, "Selecione ... ", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comissao)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeFoto, "Imagem do Produto", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 270px; height: 220px;"></div>
+                    <div>
+                        <span class="btn btn-default btn-file">
+                            <span class="fileinput-new">Selecione imagem</span>
+                            <span class="fileinput-exists">Alterar</span>
+                            @Html.TextBoxFor(model => model.NomeFoto, new { @type = "file", @class = "form-control", @accept = "image/x-png, image/gif, image/jpeg, image/jpg", @maxlength = "2000" })
+                            @Html.ValidationMessageFor(model => model.NomeFoto)
+                        </span>
+                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.AtivaSite, "Mostrar no Site", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.CheckBoxFor(model => model.AtivaSite, new { htmlAttributes = new { @class = "form-control checkbox" }})
+                @Html.ValidationMessageFor(model => model.AtivaSite)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Observacao, "Observação", new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Observacao)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-primary">Salvar Registros</button>
+                <a class="btn btn-danger" href="@Url.Action("Index")">Cancelar</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jasny-bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.maskMoney.js"></script>
+
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $("#Lucro, #ValorCompra").blur(function () {
+        //        CalculaValorVenda();
+        //    });
+        //});
+
+        $(function () {
+            //$("input.dinheiro").maskMoney({ showSymbol: true, symbol: "R$", decimal: ",", thousands: "." });
+            $("#ValorVenda").maskMoney({ thousands: '.', decimal: ',' });
+            $("#ValorCompra").maskMoney({ thousands: '.', decimal: ',' });
+            //$("#VALORPRAZO").maskMoney({ thousands: '.', decimal: ',' });
+
+            $("#Lucro, #ValorCompra").blur(function () {
+                CalculaValorVenda();
+            });
+        });
+
+        var CalculaValorVenda = function () {
+            var valorcompra = parseFloat($('#ValorCompra').val().replace('.', '').replace(',', '.'));
+            var valorlucro = parseFloat($('#Lucro').val().replace('.', '').replace(',', '.'));
+
+            if (isNaN(valorcompra)) {
+                valorcompra = 0;
+            }
+            //alert("Eis o valor da compra " + valorcompra);
+            if (isNaN(valorlucro)) {
+                valorlucro = 0;
+            }
+            //alert("Eis o percentual do lucro " + valorlucro);
+            var total = Number(valorcompra + (valorcompra * valorlucro) / 100);
+            //alert("Eis o valor da lucro " + total);
+            //$('#ValorVenda').remove();
+            $('#ValorVenda').val((total.toFixed(2)).replace('.', ','));
+        };
+
+    </script>
+}

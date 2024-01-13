@@ -1,0 +1,154 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Venda>
+
+@{
+    ViewBag.Title = "Movimento Venda";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Movimento de vendas por período</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+
+    @using (Html.BeginForm("MovimentoVenda", "Venda", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="row col-md-7 col-xs-8">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("strDataInicial", ViewBag.CurrentFilter as string, new { @class = "form-control datepicker", @placeholder = "Data Inicial" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("strDataFinal", ViewBag.CurrentFilter as string, new { @class = "form-control datepicker", @placeholder = "Data Final" })
+                </div>
+
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-primary" type="button" title="Procurar">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <hr />
+
+    <div class="col-md-7 col-xs-8">
+        <h4><b>Vendas no período de </b> - @ViewBag.Periodo</h4>
+    </div>
+
+    <table class="table table-hover table-responsive table-condensed">
+        <thead>
+            <tr>
+                <th>Data Venda</th>
+                <th>Nome do Colaborador</th>
+                <th>Forma de Pag.</th>
+                <th>Parcelas</th>
+                <th>Valor</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clientes.Nome)
+                    </td>
+                    <td>
+                        @if (@item.IdFinanceiroTipo.Equals(1))
+                        {
+                            @Html.Label("À VISTA")
+                        }
+                        @if (@item.IdFinanceiroTipo.Equals(2))
+                        {
+                            @Html.Label("CARTÃO")}
+                        @if (@item.IdFinanceiroTipo.Equals(3))
+                        {
+                            @Html.Label("CHEQUE")}
+                        @if (@item.IdFinanceiroTipo.Equals(4))
+                        {
+                            @Html.Label("BOLETO")}
+                        @if (@item.IdFinanceiroTipo.Equals(5))
+                        {
+                            @Html.Label("PROMISSÓRIA")}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parcelas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            @Ajax.ActionLink(" ", "_Vendas", "Venda",
+                                new
+                                {
+                                    id = item.IdVenda,
+                                    nome = item.Clientes.Nome
+                                },
+                                new AjaxOptions
+                                {
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "divCarregando",
+                                    UpdateTargetId = "divResultado",
+                                    HttpMethod = "GET"
+                                }, new { Class = "btn btn-default glyphicon glyphicon-eye-open", title = "Detalhes da Venda" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("MovimentoVenda",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div id="divResultado"></div>
+
+<div id="Carregando" class="ui-loader" style="top: 270px; left: 553px; display: none;">
+    <div class="spin"></div>
+    <span>Aguarde ...</span>
+</div>
+
+@section scripts {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(".datepicker").datepicker({
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            });
+        });
+    </script>
+}

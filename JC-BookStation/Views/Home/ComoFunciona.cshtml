@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "ComoFunciona";
+}
+
+<div class="jumbotron">
+    <h1>Como Funciona ...</h1>
+</div>
+
+<div class="pagination-sm text-center">
+    <img src="~/Images/destaque2.jpg" />
+</div>
+
+<div class="body-content-sub">
+    <div class="text-justify">
+        <div class="alert alert-info">
+            <h4>Hoje o mercado de trabalho exige varias horas de trabalho, sem direitos a horários flexíveis e às vezes trabalho para o resto da vida com salários fixos sem acréscimos.</h4>
+
+            <p>
+                Seja dono do seu próprio negocio, e o melhor de tudo sem investir nada, ganhos diários, ganhe todos os dias como um empresário em uma empresa, entrando num mercado amplo sem muitas competitividades, em crescimento com um produto de alta rotatividade e excelente!!!
+            </p>
+        </div>
+        <h2>Modalidade de Crédito</h2>
+        <h3>Como Funciona ?</h3>
+        <p>
+            A Empresa abre um credito para o associado sem pagar nada. O associado pega na empresa um limite de produtos para revender, e ganha o seu dinheiro em cima das peças vendidas, caso não venda. você tem a opção de devolver a os materiais que não forem vendidos.
+        </p>
+        <h2>Abra sua Franquia</h2>
+        <p>
+            Na indicação de cada pessoa indicada para a empresa você passa a ser um líder e tem ganhos de bônus em vendas de cada pessoa indicada. Tudo que os seu indicados venderem você terá um beneficio de R$ 1,00 - R$ 1,50 - R$ 2,00.
+            <br />
+            Ex.: Seu indicado vendeu 20 peças de R$ 1,00, você ganha R$ 20,00.  20 peças de 1,50, voce ganha 30,00 .  20 peças de 2,00, você ganha 40,00
+        </p>
+        <div class=" table-responsive">
+            <table class="table table-striped table-bordered table-condensed text-center">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Nº de peças</th>
+                        <th>Valor Unitário</th>
+                        <th>Total de Ganhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20 peças</td>
+                        <td>R$ 1,00</td>
+                        <td>R$ 20,00</td>
+                    </tr>
+                    <tr>
+                        <td>20 peças</td>
+                        <td>R$ 1,50</td>
+                        <td>R$ 30,00</td>
+                    </tr>
+                    <tr>
+                        <td>20 peças</td>
+                        <td>R$ 2,00</td>
+                        <td>R$ 40,00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            @*<h1 class="alert alert-danger text-center">Total de ganhos = <b>R$ 17.000,00</b></h1>*@
+        </div>
+        <h2>Show de Prêmios</h2>
+        <h3>Como Funciona ?</h3>
+        <p>
+            Além de seus ganhos nas vendas dos produtos, e ganhos de bônus indicação. Você também participara do show de prêmios. A cada peca vendida você contabilizara 1 ponto.  Os produtos do show de prêmios terão a sua pontuação. Ex. Se você juntar 200 pontos em 15dias ganhara sem sorteio um DVD.
+        </p>
+        <h2>Pacote avista</h2>
+        <p>
+            A Cada pacote pagando a vista ou no cartão, você terá bonificações em produtos. Você terá bônus em produtos que é mesma que dinheiro.
+        </p>
+        <div class="text-center">
+            @*@Html.ActionLink("QUERO SABER MAIS!", "ComoFunciona", "Home", null, new { @class = "btn btn-info btn-lg" })*@
+            @Html.ActionLink("QUERO PARTICIPAR!", "Create", "Cadastro", null, new { @class = "btn btn-warning btn-lg" })
+        </div>
+    </div>
+</div>

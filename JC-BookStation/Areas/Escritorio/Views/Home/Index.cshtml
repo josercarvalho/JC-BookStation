@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Escritorio/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.IsAuthenticated)
+{
+    <br />
+    @*<ul class="breadcrumb">
+        <li class="dropdown-header">ACESSO RÁPIDO</li>
+        <li><a href="@Url.Action("Construcao", "Home")">Orçamento</a></li>
+        <li><a href="@Url.Action("Edit", "Cliente")">Meus Dados</a></li>
+        <li><a href="@Url.Action("Index", "Bonus")">Meus Bonus</a></li>
+        <li><a href="@Url.Action("Create", "Fornecedor")">Minha Rede</a></li>
+        <li><a href="@Url.Action("Create", "Produto")">Minhas Compras</a></li>
+        <li><a href="@Url.Action("index", "Bonus")">Bonus</a></li>
+    </ul>*@
+    @Html.Partial("_Detalhes")
+}
+

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JC_BookStation.Data.Models.Comissao>
+
+@{
+    ViewBag.Title = "Bonus";
+    Layout = "~/Areas/Escritorio/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bonus</h2>
+
+<div class="form-horizontal dados">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Data da Venda</th>
+                <th>Data da Baixa</th>
+                <th>Valor</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!@Model.Any())
+            {
+                <tr><td colspan="6" class="text-center"><em>Sem Bonus para este Colaborador!</em></td></tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataVenda)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataBaixa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorComissao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+﻿@model JC_BookStation.Data.Models.GrupoProdutos
+
+@{
+    ViewBag.Title = "Novo Grupo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <h2>Cadastrar Grupo de Produtos</h2>
+    <div class="form-horizontal dados">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+
+        <div class="form-group">
+			<div class="col-md-offset-3 col-md-9">
+				<button type="submit" class="btn btn-primary">Salvar Registros</button>
+				<a class="btn btn-danger" href="@Url.Action("Index")" >Cancelar</a>
+			</div>
+		</div>
+    </div>
+}
+

@@ -1,0 +1,180 @@
+﻿@model JC_BookStation.ViewModels.VendaBaixaConsignadaViewModel
+
+@{
+    ViewBag.Title = "BaixaConsignada";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dados da Venda</h2>
+<div class="form-horizontal dados">
+
+    @Html.HiddenFor(model => model.IdVenda)
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                @Html.Label("Cliente", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Tipo da Venda", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.TipoVenda, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Tipo Financeiro", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.FormaPagamento, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="form-group">
+                @Html.Label("Parcelas", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Parcelas, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Data da Venda", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.DataVenda, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Valor da Venda", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Produtos da Venda</h2>
+<div class="form-horizontal dados">
+    <table id="listaProdutos" class="table table-hover table-condensed table-bordered table-responsive">
+        <thead class="bg-info">
+            <tr>
+                <th>Código Barra</th>
+                <th>Nome do Produto</th>
+                <th>Qnt.</th>
+                <th>Bonus</th>
+                <th>Vl. Unitário</th>
+                <th>Subtotal</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProdutosVendas)
+            {
+                <tr>
+                    <td>@item.Produtos.CodigoBarras</td>
+                    <td>@item.Produtos.Nome</td>
+                    <td>@item.Quantidade</td>
+                    <td>@item.Bonus</td>
+                    <td>@item.ValorUnitario</td>
+                    <td>@item.SubTotal</td>
+                    <td>
+                        <div class="btn-group">
+                            <button id="btn-delete" class="btn btn-warning btn-delete glyphicon glyphicon-trash" data-id="@item.IdVendaItem" data-quantidade="@item.Quantidade" data-nome="@item.Produtos.Nome" title="Devolução do(a) @item.Produtos.Nome"></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="panel-footer">
+        <button id="btn-Salvar" class="btn btn-primary" data-id="@Model.IdVenda" value="Finalizar Venda" title="Finalizar Venda">Finalizar Venda</button>
+        @Html.ActionLink("Imprimir Venda", "PdfProdutosVenda", "Venda", new { id = @Model.IdVenda }, new { @id = "btn-Imaprimir", @class = "btn btn-info", @title = "Imprimir Venda", @target = "_blank;" })
+        <a class="btn btn-warning" title="Voltar sem finalizar venda" href="@Url.Action("VendaBaixa", "Venda")">Fechar Venda</a>
+    </div>
+</div>
+
+<div id="progress" class="ui-loader" style="top: 270px; left: 553px; display: none;">
+    <div class="spin"></div>
+    <span>Aguarde ...</span>
+</div>
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+@section scripts {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload();
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                $("#progress").show();
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                //var itemProduto = $(this).data('produto');
+                //var itemnome = $(this).data("nome");
+                var itemquant = $(this).data("quantidade");
+                bootbox.prompt("Quantos produtos devolvidos?", function (result) {
+                    if (result === null) {
+                        Example.show("Operação Candelada por falta de dados.");
+                    } else {
+                        if (result > itemquant) {
+                            bootbox.alert("Quantidade inválida. Verifique!");
+                        } else {
+                            devolverProduto(itemId, result);
+                            setTimeout("Refresh()", 3000);
+                        }
+                    }
+                });
+                $("#progress").hide();
+            });
+
+            var devolverProduto = function (id, quantidade) {
+                var strUrl = "/Venda/DevolveProduto/";
+                $.post(strUrl, { id: id, quantidade: quantidade }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+
+            $("#btn-Salvar").click(function (e) {
+                $("#progress").show();
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                bootbox.confirm("Confirma FECHAMENTO dessa VENDA ?", function (result) {
+                    if (result) {
+                        fechaVenda(itemId);
+                        //setTimeout("Refresh()", 3000);
+                    }
+                });
+                $("#btn-Salvar").addClass("disabled");
+                $("#progress").hide();
+            });
+
+            var fechaVenda = function (id) {
+                var strUrl = "/Venda/FinalizarVenda/";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+}

@@ -1,0 +1,42 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <label class="navbar-brand">Olá @User.Identity.Name!</label>
+            <form class="navbar-form navbar-left" role="search" action="@Url.Action("Sair", "Usuario")">
+                <button type="submit" class="glyphicon glyphicon-log-out btn btn-danger" title="Sair"></button>
+            </form>
+        </li>
+    </ul>
+}
+else
+{
+    using (Html.BeginForm("AutenticarUsuario", "Usuario", FormMethod.Post, new { @class = "navbar-form navbar-right", @id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.TextBox("Email", "E-mail", new { @class = "form-control input-sm ", @autofocus = "autofocus", @onfocus = "this.value=''", placeholder = "E-mail", @title = "e-mail de acesso" })
+                @Html.Password("Senha", "", new { @class = "form-control input-sm ", @onfocus = "this.value=''", placeholder = "Senha", @title = "Senha de acesso" })
+                <button class="btn btn-success glyphicon glyphicon-log-in" type="submit" title="Login"></button>
+            </li>
+        </ul>
+    }
+}
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function valida() {
+                if (document.getElementById("Email") == "") {
+                    alert("O campo Usuário é obrigatório");
+                    return false;
+                }
+                return true;
+            };
+        });
+    </script>
+}*@

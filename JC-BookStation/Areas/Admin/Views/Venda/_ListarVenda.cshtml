@@ -1,0 +1,102 @@
+﻿@model IQueryable<JC_BookStation.Data.Models.Venda>
+
+<div class="row">
+    <div class="col-md-7 col-xs-8">
+        <h4><b>Venda realizada para </b> - @ViewBag.Nome</h4>
+    </div>
+    <div class="col-md-5 col-sm-3 text-right">
+        @Html.ActionLink("OK", "MovimentoVenda", "Venda", null, new { @class = "btn btn-success", @title = "OK" })
+    </div>
+
+    <div class="form-horizontal">
+        <h2>Dados da Venda</h2>
+        <hr />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.Label("Cliente", new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.Editor("IdCliente", new { htmlAttributes = new { @class = "form-control input-sm", @disabled = "disabled" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tipo da Venda", new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("TipoVenda", new[] {
+                            new SelectListItem {Text = "VENDA DIRETA", Value = "0"},
+                            new SelectListItem {Text = "VENDA CONSIGNADA", Value = "1"}
+                        }, "TIPO DA VENDA", new { @class = "form-control input-sm", @disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tipo Financeiro", new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownList("IdFinanceiroTipo", ViewBag.IdFinanceiroTipo as SelectList, "TIPO FINANCEIRO", new { @class = "form-control input-sm", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+
+                <div class="form-group">
+                    @Html.Label("Parcelas", new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBox("Parcelas", null, new { @class = "form-control input-sm", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Data da Venda", new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBox("DataVenda", null, new { @class = "form-control input-sm", @title = "Data da Venda", @data_bind = "date: dataVenda", @disabled = "disabled" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Valor da Venda", new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBox("Valor", null, new { @class = "form-control input-sm", @disabled = "disabled" })
+                    </div>
+                </div>
+                @Html.Hidden("idVenda", null, new { @data_bind = "value: idVenda" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Produtos da Venda</h2>
+<hr />
+
+<table id="listaProdutos" class="table table-hover table-condensed table-bordered table-responsive">
+    <thead class="bg-info">
+        <tr>
+            <th>Código Barra</th>
+            <th>Nome do Produto</th>
+            <th>Qnt.</th>
+            <th>Bonus</th>
+            <th>Vl. Unitário</th>
+            <th>Subtotal</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> 
+                    @Html.DisplayFor(modelItem => item.ProdutosVenda)
+                </td>
+                <td data-bind="text: Nome"></td>
+                <td data-bind="text: Quantidade"></td>
+                <td data-bind="text: formatCurrency(Comissao)"></td>
+                <td data-bind="text: formatCurrency(ValorUnitario)"></td>
+                <td data-bind="text: formatCurrency(subtotal)"></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-danger glyphicon glyphicon-trash" title="Remover da lista" href='#' data-bind='click: $root.excluir'></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,45 @@
+﻿@model JC_BookStation.ViewModels.VendaViewModel
+@{
+    ViewBag.Title = "PdfProdutosVenda";
+    Layout = "~/Areas/Admin/Views/Shared/_PdfLayout.cshtml";
+    var hoje = DateTime.Now.Date;
+}
+
+<h2>Produtos da Venda</h2>
+<table class="table table-bordered table-striped">
+    <thead class="bg-info">
+        <tr>
+            <th>QNT</th>
+            <th>Nome do Produto</th>
+            <th>UNT</th>h>
+            <th>SubTotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProdutosVendas)
+        {
+            <tr>
+                <td>@item.Quantidade</td>
+                <td>@item.Produtos.Nome</td>
+                <td>@item.ValorUnitario</td>
+                <td>@item.SubTotal</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 class="form-group pull-right">
+    <b>Total de Itens: </b>
+    <span>@Model.TotalItens </span>
+    <b>Valor Total: </b>
+    <span>@Model.ValorTotal</span>
+</h3>
+
+<p class="text-justify">
+    Recebi de Ayrton Gomes Corrêa, materiais Didáticos, para revender como autônomo sob minha inteira responsabilidade
+    escolhendo o percentual a acrescentar na mercadoria bem como o lugar para vender e consciente ue não tenho carga horária a cumprir
+    e nenhum vínculo empregatício.
+</p>
+<h4>Assinatura: __________________________________________</h4>
+<h3>Entregue em: @hoje </h3>
+<h3>Data de Retorno: _____/_____/________ </h3>

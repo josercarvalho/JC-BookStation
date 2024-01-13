@@ -1,0 +1,37 @@
+﻿@model JC_BookStation.ViewModels.NotaPromissoriaViewModel
+@{
+    ViewBag.Title = "NotaPromissoria";
+    Layout = "~/Areas/Admin/Views/Shared/_PdfLayout.cshtml";
+}
+
+            var retorno;
+<form class="form-inline">
+    <fieldset>
+        <legend> Nota Promissória Book Station</legend>
+        <div class="row">
+            <div class="text-left">
+                <strong>Nº. </strong> @Model.IdNota
+            </div>
+            <div class="pull-right">
+                Vencimento <span> @Model.Vencimento </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pull-right"> <span><b>R$ </b>@Model.Valor</span></div>
+        </div>
+        <h4 class="text-justify">
+            O(a) colaborador(a) @Model.Nome comprométe-se pagar por esta única via de Nota Promissória sob CPF @Model.CPF 
+            ou a sua ordem a quantia de @Model.ValorExtenso em moeda Corrente deste país. &nbsp;
+            Pagável somente neste estabelecimento até a presente data de Vencimento.
+        </h4>
+        <h3 class="bg-info">Emitente</h3>
+        <h4 class="text-justify">
+            <strong>Book Station Distribuidora, CNPJ @Model.CNPJEmpresa </strong> situada à RUA GRANDE, 1091 - CENTRO / SAO LUIS-MA. &nbsp;
+            Fone: (98) 3221-0032 / 8888-9656
+        </h4>
+        
+    </fieldset>
+</form>
+
+
+

@@ -1,0 +1,97 @@
+﻿@using System.Web.Optimization
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Acesso Restrito</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema para controle de Vendas e Comissões">
+    <meta name="author" content="JCarvalho TI">
+
+    <!-- Le styles -->
+    @Styles.Render("~/Content/css")
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <style>
+        html {
+            background-image: url('../../../../Images/bckgrd.jpg');
+        }
+
+        body {
+            padding-top: 70px;
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6">
+            <div class="text-center">
+                <h1>Seja Bem Vindo.</h1>
+                <span><img src="~/Images/Logomarca.png" height="300" width="350" /></span>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="col-md-6">
+            @using (Html.BeginForm("AutenticarUsuario", "ValidaUsuario", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin" }))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="form-signin-heading">Área do Cliente - Login</h2>
+                    </div>
+                    <div class="panel-body">
+
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.TextBox("email", "Nome de Usuário", new { @class = "form-control", @autofocus = "autofocus", @onfocus = "this.value=''", @placeholder = "Nome de Usuário", @title = "Login de Acesso" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Password("senha", "", new { @class = "form-control", @onfocus = "this.value=''", @placeholder = "Senha de Acesso", @title = "Senha de Acesso" })
+                        </div>
+
+                        @*<label class="">
+                            @Html.ActionLink("Esqueceu sua senha?", "RecuperarSenha", null, new { @class = "", onclick = "javascript: valida()" })
+                        </label>*@
+                        <button class="btn btn-success pull-right" type="submit">Entrar...</button>
+
+                    </div>
+                </div>
+                <h4><em>Através desta central você poderá:</em></h4>
+                <h5>
+                    <ul>
+                        <li>Alterar seus dados cadastrais.</li>
+                        <li>Consultar o histórico financeiro.</li>
+                        @*<li>Efetuar pedidos de mercadorias</li>*@
+
+                    </ul>
+                </h5>
+                <h2>@ViewBag.Erro</h2>
+            }
+        </div>
+    </div>
+    <!-- /container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#RecuperarSenha").click(function() {
+            var valida = function () {
+                if (document.getElementById("Email") == "") {
+                    alert("O campo e-mail é obrigatório");
+                    return false;
+                }
+                return false;
+            };
+            //$("#Senha").pstrength();
+        });
+    </script>
+</body>
+</html>

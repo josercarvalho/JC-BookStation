@@ -1,0 +1,104 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Comissao>
+
+@{
+    ViewBag.Title = "Bonus Pago";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Pagamento dos Bonus</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+    @using (Html.BeginForm("BonusPago", "Bonus", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="col-md-7 col-xs-8">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon-calendar glyphicon"></span>
+                    </span>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Procura por Data da venda" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" title="Procurar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @*@Html.ActionLink("Novo Registro", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })*@
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <br />
+    <table class="table table-hover table-condensed table-responsive">
+        <tr>
+            <th>#</th>
+            <th>@Html.ActionLink("Nome do Colaborador", "Index", new { sortOrder = ViewBag.NomeParam })</th>
+            <th>Data Venda</th>
+            <th>Data Baixa</th>
+            <th>Valor Bonus</th>
+            @*<th></th>*@
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.idComissao.ToString("0000")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clientes.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataBaixa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorComissao)
+                </td>
+                @*<td>
+                        <div class="btn-group">
+                            <button class="btn btn-default bonus-btn glyphicon glyphicon-ok" data-nome="@item.Clientes.Nome" data-id="@item.idComissao" title="Dar Baixa no Bonus de @item.Clientes.Nome"></button>
+                        </div>
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+@section scripts {
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#SearchString").datepicker({
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            });
+        });
+    </script>
+}

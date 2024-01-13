@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+    var imagePath = Server.MapPath("~/Images");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Book Station - Relatório em Tela</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="row">
+        @*<span>
+            <img src="@imagePath/Logomarca.png" height="100" width="100" class="img-responsive" alt="mug shot" />
+        </span>*@
+        <h4>
+            BOOK STATION DISTRIBUIDORA <br />
+            RUA GRANDE, Nº 1091 - CENTRO / SAO LUIS MA. <br />
+            Fone: (98) 3221-0032 / 8888-9656
+        </h4>
+    </div>
+    @RenderBody()
+</body>
+</html>

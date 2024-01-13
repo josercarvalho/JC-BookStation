@@ -1,0 +1,46 @@
+﻿@model JC_BookStation.Data.Models.GrupoClientes
+
+@{
+    ViewBag.Title = "Editar Grupo Cliente";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Grupo de Clientes</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.IdGrupo)
+
+            <div class="form-group disabled">
+                @Html.LabelFor(model => model.IdGrupo, "ID", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.IdGrupo, new { @class = "form-control", @disabled = "disabled", @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(model => model.IdGrupo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-3", @autofocus = "autofocus" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-primary">Salvar Registros</button>
+                    <a class="btn btn-danger" href="@Url.Action("Index")">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

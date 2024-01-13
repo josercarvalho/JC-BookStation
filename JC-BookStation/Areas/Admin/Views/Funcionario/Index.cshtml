@@ -1,0 +1,124 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<JC_BookStation.Data.Models.Funcionarios>
+
+@{
+    ViewBag.Title = "Cadastro Funcionários";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de Funcionários</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+    @using (Html.BeginForm("Index", "Funcionario", FormMethod.Get, new { @class = "row" }))
+    {
+        <div class="col-md-7 col-xs-8">
+            <div class="col-md-6">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Procura por Nome" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" title="Procurar">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @Html.ActionLink("Novo Registro", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    }
+    <br />
+    <table class="table table-hover table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Celular</th>
+                <th>Admissão</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.idFuncionario.ToString("0000"))*@
+                        @item.idFuncionario.ToString("0000")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Celular)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataAdmissao)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            @Html.ActionLink(" ", "Edit", new { id = item.idFuncionario }, new { @class = "btn btn-default glyphicon glyphicon-folder-open", @Title = "Editar" })
+                            <button id="btn-delete" class="btn btn-default btn-delete glyphicon glyphicon-trash" data-nome="@item.Nome" data-id="@item.idFuncionario" title="Excluir @item.Nome"></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload(true);
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                var nome = $(this).data("nome");
+                bootbox.confirm("Tem certeza que deseja EXCLUIR " + nome + " ?", function (result) {
+                    if (result) {
+                        excluiFuncionario(itemId);
+                        setTimeout("Refresh()", 3000);
+                    }
+                });
+            });
+
+            var excluiFuncionario = function (id) {
+                var strUrl = "/Funcionario/DeleteFuncionario";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+}

@@ -1,0 +1,98 @@
+﻿@model List<JC_BookStation.Data.Models.GrupoClientes>
+
+@{
+    ViewBag.Title = "Cadastro Grupo de Clientes";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem Grupo de Clientes</h2>
+@*<hr />*@
+<div class="form-horizontal dados">
+    <div class="row">
+        <div class="col-md-7 col-xs-8">
+            @*<div class="input-sm input-group-sm">
+                    <div class="col-md-5">
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control input-sm", @placeholder = "Procura por Nome" })
+                    </div>
+                    <button class="glyphicon glyphicon-search btn-info btn-sm " type="submit" value="Procurar" title="Procurar"></button>
+                </div>*@
+        </div>
+        <div class="col-md-5 col-sm-3 text-right">
+            @Html.ActionLink("Novo Registro", "Create", null, new { @class = "btn btn-success", @Title = "Cadastrar" })
+            @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-warning", @title = "Tela Inicial" })
+        </div>
+    </div>
+    <br />
+    <table class="table table-hover table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.IdGrupo.ToString("0000"))*@
+                        @item.IdGrupo.ToString("0000")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            @Html.ActionLink(" ", "Edit", new { id = item.IdGrupo }, new { @class = "btn btn-default glyphicon glyphicon-folder-open", @Title = "Editar" })
+                            <button id="btn-delete" class="btn btn-default btn-delete glyphicon glyphicon-trash" data-nome="@item.Nome" data-id="@item.IdGrupo" title="Excluir @item.Nome"></button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload(true);
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                var nome = $(this).data("nome");
+                bootbox.confirm("Tem certeza que deseja EXCLUIR " + nome + " ?", function (result) {
+                    if (result) {
+                        excluiGrupo(itemId);
+                        setTimeout("Refresh()", 3000);
+                    }
+                });
+            });
+
+            var excluiGrupo = function (id) {
+                var strUrl = "/GrupoClientes/DeleteGrupo";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+}
